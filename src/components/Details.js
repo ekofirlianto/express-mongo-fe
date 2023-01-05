@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import CreateIcon from '@mui/icons-material/Create';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import img from '../img/profile.png';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { useParams, NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import img from "../img/profile.png";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useParams, NavLink, useNavigate } from "react-router-dom";
 
 const Details = () => {
-  const { id } = useParams('');
+  const { id } = useParams("");
   console.log(id);
 
   const navigate = useNavigate();
@@ -20,21 +20,24 @@ const Details = () => {
   console.log(getuserdata);
 
   const getdata = async () => {
-    const res = await fetch(`/getuser/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetch(
+      `https://express-mongo-be.vercel.app/getuser/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await res.json();
     console.log(data);
 
     if (res.status === 422 || !data) {
-      console.log('error ');
+      console.log("error ");
     } else {
       setUserdata(data);
-      console.log('get data');
+      console.log("get data");
     }
   };
 
@@ -44,9 +47,9 @@ const Details = () => {
 
   const deleteuser = async (id) => {
     const res2 = await fetch(`/deleteuser/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -54,10 +57,10 @@ const Details = () => {
     console.log(deletedata);
 
     if (res2.status === 422 || !deletedata) {
-      console.log('error');
+      console.log("error");
     } else {
-      console.log('user deleted');
-      navigate('/');
+      console.log("user deleted");
+      navigate("/");
     }
   };
 
@@ -73,7 +76,10 @@ const Details = () => {
                 <CreateIcon />
               </button>
             </NavLink>
-            <button className="btn btn-danger" onClick={() => deleteuser(getuserdata._id)}>
+            <button
+              className="btn btn-danger"
+              onClick={() => deleteuser(getuserdata._id)}
+            >
               <DeleteIcon />
             </button>
           </div>

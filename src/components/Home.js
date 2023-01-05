@@ -1,10 +1,10 @@
-import React, { useEffect, useState,useContext } from 'react';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import CreateIcon from '@mui/icons-material/Create';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { NavLink } from 'react-router-dom';
-import { adddata, deldata} from './context/ContextProvider';
-import { updatedata } from './context/ContextProvider';
+import React, { useEffect, useState, useContext } from "react";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { NavLink } from "react-router-dom";
+import { adddata, deldata } from "./context/ContextProvider";
+import { updatedata } from "./context/ContextProvider";
 
 export const Home = () => {
   const [getuserdata, setUserdata] = useState([]);
@@ -12,15 +12,15 @@ export const Home = () => {
 
   const { udata, setUdata } = useContext(adddata);
 
-  const {updata, setUPdata} = useContext(updatedata)
+  const { updata, setUPdata } = useContext(updatedata);
 
-  const {dltdata, setDLTdata} = useContext(deldata)
+  const { dltdata, setDLTdata } = useContext(deldata);
 
   const getdata = async (e) => {
-    const res = await fetch('/getdata', {
-      method: 'GET',
+    const res = await fetch("/getdata", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -28,10 +28,10 @@ export const Home = () => {
     console.log(data);
 
     if (res.status === 422 || !data) {
-      console.log('error ');
+      console.log("error ");
     } else {
       setUserdata(data);
-      console.log('get data');
+      console.log("get data");
     }
   };
 
@@ -40,20 +40,23 @@ export const Home = () => {
   }, []);
 
   const deleteuser = async (id) => {
-    const res2 = await fetch(`/deleteuser/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const res2 = await fetch(
+      `https://express-mongo-be.vercel.app/deleteuser/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const deletedata = await res2.json();
     console.log(deletedata);
 
     if (res2.status === 422 || !deletedata) {
-      console.log('error');
+      console.log("error");
     } else {
-      console.log('user deleted');
+      console.log("user deleted");
       setDLTdata(deletedata);
       getdata();
     }
@@ -61,33 +64,60 @@ export const Home = () => {
 
   return (
     <>
-      {udata ? 
+      {udata ? (
         <>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
             <strong>{udata.name}</strong> added successfully!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
           </div>
-        </>: ""
-      }
-      {updata ? 
+        </>
+      ) : (
+        ""
+      )}
+      {updata ? (
         <>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
             <strong>{updata.name}</strong> updated successfully!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
           </div>
-        </>: ""
-      }
-      {dltdata ? 
+        </>
+      ) : (
+        ""
+      )}
+      {dltdata ? (
         <>
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <div
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
             <strong>{dltdata.name}</strong> deleted successfully!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
           </div>
-        </>: ""
-      }
-
-
-
+        </>
+      ) : (
+        ""
+      )}
 
       <div className="mt-5">
         <div className="container">
@@ -129,7 +159,10 @@ export const Home = () => {
                             <CreateIcon />
                           </button>
                         </NavLink>
-                        <button className="btn btn-danger" onClick={() => deleteuser(element._id)}>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => deleteuser(element._id)}
+                        >
                           <DeleteIcon />
                         </button>
                       </td>

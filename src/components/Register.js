@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { adddata } from './context/ContextProvider';
+import React, { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { adddata } from "./context/ContextProvider";
 
 const Register = () => {
   const { udata, setUdata } = useContext(adddata);
@@ -8,13 +8,13 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [inpval, setINP] = useState({
-    name: '',
-    email: '',
-    age: '',
-    mobile: '',
-    work: '',
-    add: '',
-    desc: '',
+    name: "",
+    email: "",
+    age: "",
+    mobile: "",
+    work: "",
+    add: "",
+    desc: "",
   });
 
   const setdata = (e) => {
@@ -33,10 +33,10 @@ const Register = () => {
 
     const { name, email, work, add, mobile, desc, age } = inpval;
 
-    const res = await fetch('/register', {
-      method: 'POST',
+    const res = await fetch("https://express-mongo-be.vercel.app/register", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
@@ -53,12 +53,12 @@ const Register = () => {
     console.log(data);
 
     if (res.status === 422 || !data) {
-      alert('error');
-      console.log('error ');
+      alert("error");
+      console.log("error ");
     } else {
-      navigate('/');
+      navigate("/");
       setUdata(data);
-      console.log('data added');
+      console.log("data added");
     }
   };
 
@@ -72,49 +72,100 @@ const Register = () => {
             <label for="exampleInputEmail1" class="form-label">
               Name
             </label>
-            <input type="text" value={inpval.name} onChange={setdata} name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+            <input
+              type="text"
+              value={inpval.name}
+              onChange={setdata}
+              name="name"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
           </div>
 
           <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Email
             </label>
-            <input type="email" value={inpval.email} onChange={setdata} name="email" class="form-control" id="exampleInputPassword1" />
+            <input
+              type="email"
+              value={inpval.email}
+              onChange={setdata}
+              name="email"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
           </div>
 
           <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Age
             </label>
-            <input type="text" value={inpval.age} onChange={setdata} name="age" class="form-control" id="exampleInputPassword1" />
+            <input
+              type="text"
+              value={inpval.age}
+              onChange={setdata}
+              name="age"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
           </div>
 
           <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Mobile
             </label>
-            <input type="number" value={inpval.mobile} onChange={setdata} name="mobile" class="form-control" id="exampleInputPassword1" />
+            <input
+              type="number"
+              value={inpval.mobile}
+              onChange={setdata}
+              name="mobile"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
           </div>
 
           <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Work
             </label>
-            <input type="text" value={inpval.work} onChange={setdata} name="work" class="form-control" id="exampleInputPassword1" />
+            <input
+              type="text"
+              value={inpval.work}
+              onChange={setdata}
+              name="work"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
           </div>
 
           <div class="mb-3 col-lg-6 col-md-6 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Address
             </label>
-            <input type="text" value={inpval.add} onChange={setdata} name="add" class="form-control" id="exampleInputPassword1" />
+            <input
+              type="text"
+              value={inpval.add}
+              onChange={setdata}
+              name="add"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
           </div>
 
           <div class="mb-3 col-lg-12 col-md-12 col-12">
             <label for="exampleInputPassword1" class="form-label">
               Description
             </label>
-            <textarea name="desc" value={inpval.desc} onChange={setdata} className="form-control" id="" cols="30" rows="5"></textarea>
+            <textarea
+              name="desc"
+              value={inpval.desc}
+              onChange={setdata}
+              className="form-control"
+              id=""
+              cols="30"
+              rows="5"
+            ></textarea>
           </div>
 
           <button type="submit" onClick={addinpdata} class="btn btn-primary">

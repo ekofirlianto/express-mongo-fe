@@ -1,26 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, useParams, useNavigate } from 'react-router-dom';
-import { updatedata } from './context/ContextProvider';
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
+import { updatedata } from "./context/ContextProvider";
 
 const Edit = () => {
   // const [getuserdata, setUserdata] = useState([]);
   // console.log(getuserdata);
 
-  const {updata, setUPdata} = useContext(updatedata)
+  const { updata, setUPdata } = useContext(updatedata);
 
   const navigate = useNavigate();
 
   const [inpval, setINP] = useState({
-    name: '',
-    email: '',
-    age: '',
-    mobile: '',
-    work: '',
-    add: '',
-    desc: '',
+    name: "",
+    email: "",
+    age: "",
+    mobile: "",
+    work: "",
+    add: "",
+    desc: "",
   });
 
-  const { id } = useParams('');
+  const { id } = useParams("");
   console.log(id);
 
   const setdata = (e) => {
@@ -35,21 +35,24 @@ const Edit = () => {
   };
 
   const getdata = async () => {
-    const res = await fetch(`/getuser/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetch(
+      `https://express-mongo-be.vercel.app/getuser/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const data = await res.json();
     console.log(data);
 
     if (res.status === 422 || !data) {
-      console.log('error ');
+      console.log("error ");
     } else {
       setINP(data);
-      console.log('get data');
+      console.log("get data");
     }
   };
 
@@ -63,9 +66,9 @@ const Edit = () => {
     const { name, email, work, add, mobile, desc, age } = inpval;
 
     const res2 = await fetch(`/updateuser/${id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
@@ -82,10 +85,10 @@ const Edit = () => {
     console.log(data2);
 
     if (res2.status === 422 || !data2) {
-      alert('fill the data');
+      alert("fill the data");
     } else {
-      navigate('/');
-      setUPdata(data2)
+      navigate("/");
+      setUPdata(data2);
     }
   };
 
@@ -100,49 +103,100 @@ const Edit = () => {
               <label for="exampleInputEmail1" class="form-label">
                 Name
               </label>
-              <input type="text" value={inpval.name} onChange={setdata} name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+              <input
+                type="text"
+                value={inpval.name}
+                onChange={setdata}
+                name="name"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="exampleInputPassword1" class="form-label">
                 Email
               </label>
-              <input type="email" value={inpval.email} onChange={setdata} name="email" class="form-control" id="exampleInputPassword1" />
+              <input
+                type="email"
+                value={inpval.email}
+                onChange={setdata}
+                name="email"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="exampleInputPassword1" class="form-label">
                 Age
               </label>
-              <input type="text" value={inpval.age} onChange={setdata} name="age" class="form-control" id="exampleInputPassword1" />
+              <input
+                type="text"
+                value={inpval.age}
+                onChange={setdata}
+                name="age"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="exampleInputPassword1" class="form-label">
                 Mobile
               </label>
-              <input type="number" value={inpval.mobile} onChange={setdata} name="mobile" class="form-control" id="exampleInputPassword1" />
+              <input
+                type="number"
+                value={inpval.mobile}
+                onChange={setdata}
+                name="mobile"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="exampleInputPassword1" class="form-label">
                 Work
               </label>
-              <input type="text" value={inpval.work} onChange={setdata} name="work" class="form-control" id="exampleInputPassword1" />
+              <input
+                type="text"
+                value={inpval.work}
+                onChange={setdata}
+                name="work"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
             </div>
 
             <div class="mb-3 col-lg-6 col-md-6 col-12">
               <label for="exampleInputPassword1" class="form-label">
                 Address
               </label>
-              <input type="text" value={inpval.add} onChange={setdata} name="add" class="form-control" id="exampleInputPassword1" />
+              <input
+                type="text"
+                value={inpval.add}
+                onChange={setdata}
+                name="add"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
             </div>
 
             <div class="mb-3 col-lg-12 col-md-12 col-12">
               <label for="exampleInputPassword1" class="form-label">
                 Description
               </label>
-              <textarea name="desc" value={inpval.desc} onChange={setdata} className="form-control" id="" cols="30" rows="5"></textarea>
+              <textarea
+                name="desc"
+                value={inpval.desc}
+                onChange={setdata}
+                className="form-control"
+                id=""
+                cols="30"
+                rows="5"
+              ></textarea>
             </div>
 
             <button type="submit" onClick={updateuser} class="btn btn-primary">
