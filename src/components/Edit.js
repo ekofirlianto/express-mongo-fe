@@ -65,21 +65,24 @@ const Edit = () => {
 
     const { name, email, work, add, mobile, desc, age } = inpval;
 
-    const res2 = await fetch(`/updateuser/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        work,
-        add,
-        mobile,
-        desc,
-        age,
-      }),
-    });
+    const res2 = await fetch(
+      `https://express-mongo-be.vercel.app/updateuser/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          work,
+          add,
+          mobile,
+          desc,
+          age,
+        }),
+      }
+    );
 
     const data2 = await res2.json();
     console.log(data2);

@@ -17,7 +17,7 @@ export const Home = () => {
   const { dltdata, setDLTdata } = useContext(deldata);
 
   const getdata = async (e) => {
-    const res = await fetch("/getdata", {
+    const res = await fetch("https://express-mongo-be.vercel.app/getdata", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
